@@ -1,7 +1,5 @@
--- 1. Nạp các cài đặt cơ bản (options)
 require("config.options")
 
--- 2. Tự động cài đặt Lazy.nvim nếu chưa có
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -22,3 +20,8 @@ require("lazy").setup({
 })
 
 require("config.keymaps")
+
+
+vim.opt.signcolumn = "no"        
+vim.opt.number = true           
+vim.opt.relativenumber = false     
