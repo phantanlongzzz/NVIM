@@ -12,8 +12,8 @@ local options = {
   cursorline     = true,   
   signcolumn     = "yes:1", 
   numberwidth    = 2,       
-  list           = true,   -- Hiển thị ký tự ẩn
-  listchars      = { tab = '» ', trail = '·', nbsp = '␣' }, -- Hình dáng ký tự ẩn
+  list           = true,  
+  listchars      = { tab = '» ', trail = '·', nbsp = '␣' },
 }
 vim.opt.guicursor = "a:block"
 
