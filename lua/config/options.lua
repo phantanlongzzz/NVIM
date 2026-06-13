@@ -1,14 +1,22 @@
-vim.g.mapleader = " " -- Đặt nút Space (Dấu cách) làm nút kích hoạt phím tắt (Leader key)
+local options = {
+  number         = true,   
+  relativenumber = true,   
+  splitright     = true,   
+  splitbelow     = true,   
+  expandtab      = true,
+  shiftwidth     = 2,      
+  tabstop        = 2,     
+  softtabstop    = 2,      
+  smartindent    = true,   
+  termguicolors  = true,   
+  cursorline     = true,   
+  signcolumn     = "yes:1", 
+  numberwidth    = 2,       
+  list           = true,   -- Hiển thị ký tự ẩn
+  listchars      = { tab = '» ', trail = '·', nbsp = '␣' }, -- Hình dáng ký tự ẩn
+}
+vim.opt.guicursor = "a:block"
 
-local opt = vim.opt
-
-opt.number = true          -- Hiển thị số dòng
-opt.relativenumber = true  -- Hiển thị số dòng tương đối (rất tiện để nhảy dòng)
-opt.splitright = true      -- Mở cửa sổ dọc về bên phải
-opt.splitbelow = true      -- Mở cửa sổ ngang về bên dưới
-opt.expandtab = true       -- Chuyển Tab thành Space
-opt.shiftwidth = 4         -- Thụt lề 4 space (chuẩn Python)
-opt.tabstop = 4            -- 1 tab = 4 space
-opt.smartindent = true     -- Tự động thụt lề thông minh
-opt.termguicolors = true   -- Bật màu sắc 24-bit (bắt buộc cho Kanagawa)
-opt.cursorline = true      -- Highlight dòng đang đứng
+for key, value in pairs(options) do
+  vim.opt[key] = value
+end

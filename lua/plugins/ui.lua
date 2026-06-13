@@ -1,25 +1,29 @@
 return {
-  -- Giao diện Tender
+  -- Giao diện Gruvbox
   {
-    "jacoborus/tender.vim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd("colorscheme tender")
+      require("gruvbox").setup({
+        contrast = "hard",        -- "soft" hoặc "hard"
+        transparent_mode = false,
+      })
+      vim.cmd("colorscheme gruvbox")
     end,
   },
 
   -- Icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
-  -- Lualine (Đã đồng bộ sang màu Tender cứng)
+  -- Lualine
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
-          theme = "tender",
+          theme = "gruvbox",
           section_separators   = { left = "", right = "" },
           component_separators = { left = "│", right = "│" },
           globalstatus = true,
@@ -31,11 +35,10 @@ return {
             { 
               "diff", 
               symbols = { added = " ", modified = " ", removed = " " }, 
-              -- Đổi sang mã màu HEX chuẩn của Tender
               diff_color = { 
-                added    = { fg = "#b8bb26" }, -- Xanh lá 
-                modified = { fg = "#ffc24b" }, -- Vàng chanh
-                removed  = { fg = "#f43753" }  -- Đỏ
+                added    = { fg = "#b8bb26" },
+                modified = { fg = "#fabd2f" },
+                removed  = { fg = "#fb4934" }  
               } 
             },
           },
@@ -45,12 +48,11 @@ return {
               "diagnostics", 
               sources = { "nvim_lsp" }, 
               symbols = { error = " ", warn = " ", info = " ", hint = " " }, 
-              -- Đổi sang mã màu HEX chuẩn của Tender cho đồng bộ
               diagnostics_color = { 
-                error = { fg = "#f43753" }, 
-                warn  = { fg = "#ffc24b" }, 
-                info  = { fg = "#b3deef" }, 
-                hint  = { fg = "#73cef4" } 
+                error = { fg = "#fb4934" }, 
+                warn  = { fg = "#fabd2f" }, 
+                info  = { fg = "#83a598" }, 
+                hint  = { fg = "#8ec07c" } 
               } 
             },
             "encoding", "fileformat", "filetype",
@@ -58,46 +60,11 @@ return {
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
-        -- PHẦN CẤU HÌNH WINBAR PHẲNG MÀU ĐEN
-        winbar = {
-          lualine_a = {
-            {
-              function()
-                local filename = vim.fn.expand("%:t")
-                local dir = vim.fn.expand("%:p:h")
-                local home = vim.fn.expand("$HOME")
-                dir = dir:gsub(home, "~")
-                if filename == "" then filename = "[No Name]" end
-                return string.format(" %s (%s) - Nvim", filename, dir)
-              end,
-              color = { fg = "#E6EAED", bg = "#010101", gui = "none" }, 
-              separator = { left = "", right = "" },
-              padding = 0,
-            },
-          },
-        },
-        inactive_winbar = {
-          lualine_a = {
-            {
-              function()
-                local filename = vim.fn.expand("%:t")
-                local dir = vim.fn.expand("%:p:h")
-                local home = vim.fn.expand("$HOME")
-                dir = dir:gsub(home, "~")
-                if filename == "" then filename = "[No Name]" end
-                return string.format(" %s (%s) - Nvim", filename, dir)
-              end,
-              color = { fg = "#8A9191", bg = "#393836", gui = "none" }, 
-              separator = { left = "", right = "" },
-              padding = 0,
-            },
-          },
-        },
       })
     end,
   },
 
-  -- Cây thư mục (Nvim-Tree)
+  -- Cây thư mục
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -108,21 +75,24 @@ return {
     end,
   },
 
-  -- Bộ tô màu code xịn (Treesitter)
+  -- Treesitter (ĐÃ SỬA)
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local configs = require("nvim-treesitter")
-      configs.setup({
-        ensure_installed = { "lua", "python", "cpp", "vim", "vimdoc", "markdown" },
-        highlight = { 
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-      })
+      -- Cách fix an toàn nhất hiện nay
+      local ok, configs = pcall(require, "nvim-treesitter.configs")
+      if ok then
+        configs.setup({
+          ensure_installed = { "lua", "python", "cpp", "vim", "vimdoc", "markdown", "c" },
+          highlight = { 
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+          indent = { enable = true },
+        })
+      end
     end,
   },
 }

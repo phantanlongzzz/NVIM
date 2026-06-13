@@ -33,3 +33,11 @@ keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { silent = true })
 
 -- Nhấn Ctrl + l để nhảy từ file code (bên trái) sang Terminal (bên phải)
 keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
+
+
+
+-- Bấm Space + th (Theme) để gọi menu chọn toàn bộ giao diện trong máy
+keymap.set("n", "<leader>th", ":Huez<CR>", { silent = true })
+
+-- Bấm Space + tf (Theme Favorites) để gọi các theme đánh dấu yêu thích
+keymap.set("n", "<leader>tf", ":HuezFavorites<CR>", { silent = true })
