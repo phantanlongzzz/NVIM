@@ -25,3 +25,24 @@ require("config.keymaps")
 vim.opt.signcolumn = "no"        
 vim.opt.number = true           
 vim.opt.relativenumber = false     
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = "*.cpp",
+  callback = function()
+    local lines = {
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "",
+      "int main() {",
+      "  ios::sync_with_stdio(false);",
+      "  cin.tie(nullptr);",
+      "",
+      "  return 0;",
+      "}",
+    }
+
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+
+    vim.api.nvim_win_set_cursor(0, { 8, 2 })
+  end,
+})
