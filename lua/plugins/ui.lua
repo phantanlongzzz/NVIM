@@ -99,4 +99,19 @@ return {
       end
     end,
   },
+
+  {
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  config = function()
+    require("toggleterm").setup({
+      direction = "horizontal",
+      size = 12,
+      start_in_insert = true,
+      persist_size = true,
+      close_on_exit = false,
+      shade_terminals = false,
+    })
+  end,
+},
 }
