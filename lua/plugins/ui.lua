@@ -1,50 +1,69 @@
 return {
-  -- Giao diện Gruvbox
+  -- Anysphere Theme
   {
-    "ellisonleao/gruvbox.nvim",
+    "dapovich/anysphere.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        contrast = "hard",        -- hard cho màu đậm, nổi bật hơn
-        transparent_mode = false,
+      require("anysphere").setup({
+        transparent = false,
+        italics = true,
+
+        -- Tuỳ chỉnh màu nếu muốn
+        colors = {},
+
+        themes = function(colors)
+          return {
+            -- CursorLine nổi bật hơn
+            CursorLine = { bg = "#1e1f22" },
+
+            -- NvimTree đồng bộ background
+            NvimTreeNormal = { bg = colors.bg },
+            NvimTreeNormalNC = { bg = colors.bg },
+
+            -- Terminal
+            NormalFloat = { bg = colors.bg },
+
+            -- Diagnostics
+            DiagnosticVirtualTextError = { fg = colors.red },
+            DiagnosticVirtualTextWarn = { fg = colors.yellow },
+            DiagnosticVirtualTextInfo = { fg = colors.blue },
+            DiagnosticVirtualTextHint = { fg = colors.green },
+          }
+        end,
       })
-      vim.o.background = "dark"   -- Bắt buộc dark
-      vim.cmd("colorscheme gruvbox")
+
+      vim.o.background = "dark"
+      vim.cmd.colorscheme("anysphere")
     end,
   },
 
   -- Icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
-  -- Lualine - gruvbox_dark chính thức
+  -- Lualine
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox_dark",           -- ← Đây là cái bạn muốn
+          theme = "auto", -- để tự lấy màu từ Anysphere
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           globalstatus = true,
-          refresh = { statusline = 100 },
-          height = 10,
-          padding = 1,
         },
+
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { 
-            "branch", 
-            "diff",
-          },
+          lualine_b = { "branch", "diff" },
           lualine_c = {
             {
               "filename",
               path = 1,
-              symbols = { 
-                modified = " ●", 
-                readonly = " " 
+              symbols = {
+                modified = " ●",
+                readonly = " ",
               },
             },
           },
@@ -52,11 +71,11 @@ return {
             {
               "diagnostics",
               sources = { "nvim_lsp" },
-              symbols = { 
-                error = " ", 
-                warn  = " ", 
-                info  = " ", 
-                hint  = "󰌵 " 
+              symbols = {
+                error = " ",
+                warn = " ",
+                info = " ",
+                hint = "󰌵 ",
               },
             },
             "encoding",
@@ -66,52 +85,33 @@ return {
           lualine_y = { "progress" },
           lualine_z = { "location" },
         },
-        inactive_sections = {
-          lualine_c = { "filename" },
-          lualine_x = { "location" },
-        },
       })
     end,
   },
 
-  -- Nvim Tree
+  -- NvimTree
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("nvim-tree").setup({ view = { width = 30 } })
+      require("nvim-tree").setup({
+        view = { width = 30 },
+      })
     end,
   },
-
-  -- Treesitter
+  -- Toggleterm
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
+    "akinsho/toggleterm.nvim",
+    version = "*",
     config = function()
-      local ok, configs = pcall(require, "nvim-treesitter.configs")
-      if ok then
-        configs.setup({
-          ensure_installed = { "lua", "python", "cpp", "c", "vim", "vimdoc", "markdown" },
-          highlight = { enable = true },
-          indent = { enable = true },
-        })
-      end
+      require("toggleterm").setup({
+        direction = "horizontal",
+        size = 12,
+        start_in_insert = true,
+        persist_size = true,
+        close_on_exit = false,
+        shade_terminals = false,
+      })
     end,
   },
-
-  {
-  "akinsho/toggleterm.nvim",
-  version = "*",
-  config = function()
-    require("toggleterm").setup({
-      direction = "horizontal",
-      size = 12,
-      start_in_insert = true,
-      persist_size = true,
-      close_on_exit = false,
-      shade_terminals = false,
-    })
-  end,
-},
 }
