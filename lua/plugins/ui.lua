@@ -1,5 +1,5 @@
 return {
-  -- Anysphere Theme
+  -- Anysphere Theme (Vẫn giữ nguyên cho phần code của bác)
   {
     "dapovich/anysphere.nvim",
     lazy = false,
@@ -8,23 +8,13 @@ return {
       require("anysphere").setup({
         transparent = false,
         italics = true,
-
-        -- Tuỳ chỉnh màu nếu muốn
         colors = {},
-
         themes = function(colors)
           return {
-            -- CursorLine nổi bật hơn
             CursorLine = { bg = "#1e1f22" },
-
-            -- NvimTree đồng bộ background
             NvimTreeNormal = { bg = colors.bg },
             NvimTreeNormalNC = { bg = colors.bg },
-
-            -- Terminal
             NormalFloat = { bg = colors.bg },
-
-            -- Diagnostics
             DiagnosticVirtualTextError = { fg = colors.red },
             DiagnosticVirtualTextWarn = { fg = colors.yellow },
             DiagnosticVirtualTextInfo = { fg = colors.blue },
@@ -32,7 +22,6 @@ return {
           }
         end,
       })
-
       vim.o.background = "dark"
       vim.cmd.colorscheme("anysphere")
     end,
@@ -41,49 +30,37 @@ return {
   -- Icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
-  -- Lualine
+  -- ĐÂY LÀ ĐOẠN LUALINE TẠO RA STATUS LINE Y CHANG ẢNH CỦA BÁC
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
         options = {
-          theme = "auto", -- để tự lấy màu từ Anysphere
-          component_separators = { left = "", right = "" },
+          -- 1. Theme "gruvbox" là thứ tạo ra màu cam/đỏ, nâu xám nhạt và xám đậm này
+          theme = "gruvbox", 
+          
+          -- 2. Đặt gạch đứng "|" làm phân cách giữa các thành phần (như utf-8 | unix | lua)
+          component_separators = { left = "|", right = "|" },
+          
+          -- 3. Xoá bỏ dải phân cách mảng để tạo khối vuông cứng cáp
           section_separators = { left = "", right = "" },
+          
           globalstatus = true,
         },
 
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch", "diff" },
-          lualine_c = {
-            {
-              "filename",
-              path = 1,
-              symbols = {
-                modified = " ●",
-                readonly = " ",
-              },
-            },
+          lualine_b = { "branch" }, -- Mặc định lualine đã có icon branch 
+          lualine_c = { "filename" },
+          
+          lualine_x = { 
+            "encoding", 
+            "fileformat", 
+            "filetype" -- Mặc định lualine sẽ chèn icon nvim-web-devicons ( lua)
           },
-          lualine_x = {
-            {
-              "diagnostics",
-              sources = { "nvim_lsp" },
-              symbols = {
-                error = " ",
-                warn = " ",
-                info = " ",
-                hint = "󰌵 ",
-              },
-            },
-            "encoding",
-            "fileformat",
-            "filetype",
-          },
-          lualine_y = { "progress" },
-          lualine_z = { "location" },
+          lualine_y = { "progress" }, -- Sẽ hiển thị "Top", "Bot", "xx%"
+          lualine_z = { "location" }, -- Sẽ hiển thị dòng:cột ("1:1")
         },
       })
     end,
@@ -99,6 +76,7 @@ return {
       })
     end,
   },
+  
   -- Toggleterm
   {
     "akinsho/toggleterm.nvim",
