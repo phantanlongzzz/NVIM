@@ -47,6 +47,8 @@ return {
             received_contests_directory = "$(CWD)",
 
             received_contests_problems_path = "$(PROBLEM).$(FEXT)",
+            
+            testcases_directory = ".cph",
 
             replace_received_testcases = true,
         })
