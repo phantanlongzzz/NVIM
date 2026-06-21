@@ -17,6 +17,7 @@ local options = {
 }
 vim.opt.guicursor = "a:block"
 
+
 for key, value in pairs(options) do
   vim.opt[key] = value
 end

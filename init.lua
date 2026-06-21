@@ -24,7 +24,7 @@ require("config.keymaps")
 
 vim.opt.signcolumn = "no"        
 vim.opt.number = true           
-vim.opt.relativenumber = false     
+vim.opt.relativenumber = true     
 
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = "*.cpp",
@@ -46,3 +46,8 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.api.nvim_win_set_cursor(0, { 8, 2 })
   end,
 })
+
+
+
+vim.o.background = "dark"
+vim.cmd.colorscheme("retrobox")

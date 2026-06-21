@@ -1,8 +1,6 @@
 local keymap = vim.keymap
 
--- ============================================================================
--- 1. QUẢN LÝ FILE & TÌM KIẾM (NvimTree & Telescope)
--- ============================================================================
+
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true })
 
 local builtin = require("telescope.builtin")
@@ -10,9 +8,7 @@ keymap.set("n", "<leader>ff", builtin.find_files, {})
 keymap.set("n", "<leader>fg", builtin.live_grep, {})
 keymap.set("n", "<leader>fb", builtin.buffers, {})
 
--- ============================================================================
--- 2. TERMINAL CHIA DỌC SANG PHẢI & CHẠY CODE
--- ============================================================================
+
 local Terminal = require("toggleterm.terminal").Terminal
 
 local main_term = Terminal:new({
@@ -57,19 +53,10 @@ keymap.set("n", "<F6>", function()
     )
 end)
 
--- ============================================================================
--- 3. ĐIỀU HƯỚNG NHANH GIỮA CÁC CỬA SỔ
--- ============================================================================
-keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], { silent = true })
-keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
 
--- ============================================================================
--- 4. THEME
--- ============================================================================
 keymap.set("n", "<leader>th", ":Huez<CR>", { silent = true })
 keymap.set("n", "<leader>tf", ":HuezFavorites<CR>", { silent = true })
 
--- giữa terminal và editor
 local opts = { silent = true }
 
 keymap.set("n", "<C-h>", "<C-w>h", opts)
@@ -82,3 +69,26 @@ keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
 keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
 keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
 
+
+-- Competitive Programming
+keymap.set("n", "<F7>", function()
+    vim.ui.select(
+        { "cpp", "py" },
+        { prompt = "Language:" },
+        function(choice)
+            if not choice then
+                return
+            end
+
+            require("competitest").setup({
+                received_files_extension = choice,
+            })
+
+            vim.cmd("CompetiTest receive problem")
+        end
+    )
+end, opts)
+
+keymap.set("n", "<F8>", function()
+    vim.cmd("CompetiTest run")
+end, opts)
