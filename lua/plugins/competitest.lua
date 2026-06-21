@@ -24,7 +24,7 @@ return {
                 cpp = {
                     exec = "g++",
                     args = {
-                        "-std=c++20",
+                        "-std=c++23",
                         "-O2",
                         "-Wall",
                         "$(FNAME)",
