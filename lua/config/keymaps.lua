@@ -92,3 +92,4 @@ end, opts)
 keymap.set("n", "<F8>", function()
     vim.cmd("CompetiTest run")
 end, opts)
+

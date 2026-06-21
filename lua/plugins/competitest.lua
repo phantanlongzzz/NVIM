@@ -12,6 +12,12 @@ return {
             save_current_file = true,
             save_all_files = false,
 
+            
+            template_file = {
+                cpp = vim.fn.stdpath("config") .. "/templates/cp.cpp",
+                py = vim.fn.stdpath("config") .. "/templates/cp.py",
+            },
+
             compile_directory = ".",
 
             compile_command = {
