@@ -93,3 +93,5 @@ keymap.set("n", "<F8>", function()
     vim.cmd("CompetiTest run")
 end, opts)
 
+-- Tự động chuyển thư mục làm việc sang Codeforces khi mở Neovim
+vim.cmd([[cd E:/Computer Science/Codeforces]])
