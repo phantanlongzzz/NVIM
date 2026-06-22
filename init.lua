@@ -21,7 +21,6 @@ require("lazy").setup({
 
 require("config.keymaps")
 
-
 vim.opt.signcolumn = "no"        
 vim.opt.number = true           
 vim.opt.relativenumber = true     
@@ -49,6 +48,5 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
   end,
 })
 
-
-vim.o.background = "dark"
-vim.cmd.colorscheme("retrobox")
+vim.cmd("syntax on")
+vim.opt.termguicolors = true
