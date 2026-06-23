@@ -9,11 +9,15 @@ local options = {
   softtabstop    = 2,      
   smartindent    = true,   
   termguicolors  = true,   
-  cursorline     = true,   
+  cursorline     = false,   
   signcolumn     = "yes:1", 
   numberwidth    = 2,       
   list           = true,  
   listchars      = { tab = '» ', trail = '·', nbsp = '␣' },
+
+  clipboard = "unnamedplus",
+  updatetime = 250,
+  swapfile = false,
 }
 vim.opt.guicursor = "a:block"
 
