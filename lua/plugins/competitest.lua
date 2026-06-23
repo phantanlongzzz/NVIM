@@ -51,6 +51,8 @@ return {
             testcases_directory = ".cph",
 
             replace_received_testcases = true,
+            
+            local_port = 10043,
         })
     end,
 }
