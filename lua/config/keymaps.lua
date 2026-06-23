@@ -79,7 +79,11 @@ keymap.set("n", "<F7>", function()
         { prompt = "Language Extension:" },
         function(choice)
             if not choice then return end
-            require("competitest.config").config.received_files_extension = choice
+            
+            require("competitest").setup({
+                received_files_extension = choice,
+            })
+            
             vim.cmd("CompetiTest receive problem")
         end
     )
