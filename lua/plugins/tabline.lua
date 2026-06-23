@@ -1,33 +1,43 @@
 return {
-  "romgrk/barbar.nvim",
-  dependencies = {
-    "lewis6991/gitsigns.nvim",     
-    "nvim-tree/nvim-web-devicons", 
-  },
-  init = function()
-    vim.g.barbar_auto_setup = false
-  end,
-  opts = {
-    animation = true,       
-    clickable = true,       
-    auto_hide = false,     
-    icons = {
-      buffer_index = false, 
-      filetype = { enable = true },
-      button = "×", 
-      modified = { button = "●" }, 
-    },
-  },
-  config = function(_, opts)
-    require("barbar").setup(opts)
+  "akinsho/bufferline.nvim",
+  version = "*",
+  dependencies = "nvim-tree/nvim-web-devicons",
+  config = function()
+    require("bufferline").setup({
+      options = {
+        mode = "buffers",
 
-  
+        separator_style = "thin", 
+        
+        always_show_bufferline = true,
+        show_buffer_close_icons = true,
+        show_close_icon = false,
+        
+        offsets = {
+          {
+            filetype = "NvimTree",
+            text = "File Explorer",
+            text_align = "center",
+            separator = true,
+          }
+        },
+        
+        indicator = {
+          style = "icon",
+          icon = "▎",
+        },
+        modified_icon = "●",
+        close_icon = "",
+        left_trunc_marker = "",
+        right_trunc_marker = "",
+      },
+    })
+
     local map = vim.keymap.set
-    local opts_key = { noremap = true, silent = true }
+    local opts = { noremap = true, silent = true }
 
-    map("n", "<Tab>", "<Cmd>BufferNext<CR>", opts_key)
-    map("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts_key)
-
-    map("n", "<A-c>", "<Cmd>BufferClose<CR>", opts_key)
+    map("n", "<C-Right>", "<cmd>BufferLineCycleNext<cr>", opts)
+    map("n", "<C-Left>", "<cmd>BufferLineCyclePrev<cr>", opts)
+    map("n", "<A-c>", "<cmd>bdelete<cr>", opts) 
   end,
 }
