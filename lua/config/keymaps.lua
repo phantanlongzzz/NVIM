@@ -95,4 +95,4 @@ keymap.set("n", "<F8>", function()
 end, opts)
 
 -- Tự động nhảy vào thư mục làm bài Codeforces khi mở Neovim
-vim.cmd([[cd E:/Computer Science/Codeforces]])
+vim.cmd([[cd E:\CompetitiveProgramming\CF]])
