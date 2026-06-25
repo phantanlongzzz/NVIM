@@ -6,9 +6,9 @@ local options = {
   
   -- Thiết lập khoảng cách thụt lề chuẩn cho C++ CP (4 spaces)
   expandtab      = true,
-  shiftwidth     = 8,      
-  tabstop        = 8,     
-  softtabstop    = 8,      
+  shiftwidth     = 2,      
+  tabstop        = 2,     
+  softtabstop    = 2,      
   smartindent    = true,   
   cindent        = true,   -- Bật thuật toán căn lề chuyên dụng riêng cho ngôn ngữ họ C/C++
   

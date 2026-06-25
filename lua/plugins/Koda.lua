@@ -15,7 +15,7 @@ return {
         },
       })
       
-      vim.cmd("colorscheme koda") 
+      --vim.cmd("colorscheme koda") 
     end,
   },
 }
