@@ -6,16 +6,16 @@ local options = {
   
   -- Thiết lập khoảng cách thụt lề chuẩn cho C++ CP (4 spaces)
   expandtab      = true,
-  shiftwidth     = 2,      
-  tabstop        = 2,     
-  softtabstop    = 2,      
+  shiftwidth     = 4,      
+  tabstop        = 4,     
+  softtabstop    = 4,      
   smartindent    = true,   
   cindent        = true,   -- Bật thuật toán căn lề chuyên dụng riêng cho ngôn ngữ họ C/C++
   
   termguicolors  = true,   -- Bật hệ màu 24-bit chuẩn cho theme Cursor/GitHub
   cursorline     = false,  
   signcolumn     = "no",   -- Thống nhất tắt signcolumn ở đây để màn hình code CP rộng rãi nhất
-  numberwidth    = 2,      
+  numberwidth    = 3,      
   
   -- Hiển thị ký tự ẩn (Giúp kiểm tra xem có bị thừa khoảng trắng cuối dòng không)
   list           = true,  
@@ -30,9 +30,6 @@ local options = {
   ignorecase     = true,          -- Tìm kiếm không phân biệt hoa thường
   smartcase      = true,          -- Tự động chuyển sang phân biệt hoa thường nếu bạn gõ chữ IN HOA
 }
-
--- Ép con trỏ chuột luôn ở dạng khối (Block) vững chắc trong mọi chế độ, dễ định vị mắt
-vim.opt.guicursor = "a:block"
 
 -- Vòng lặp gán cấu hình tự động
 for key, value in pairs(options) do
