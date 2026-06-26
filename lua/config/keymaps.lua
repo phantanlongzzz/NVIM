@@ -1,16 +1,13 @@
--- ĐỊNH NGHĨA PHÍM TẮT TRONG NEOVIM
 local keymap = vim.keymap
 local opts = { silent = true }
 
 -- File Explorer (NvimTree)
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
--- Telescope (Tối ưu hóa: Giờ chỉ load khi bấm phím)
 keymap.set("n", "<leader>ff", function() require("telescope.builtin").find_files() end, {})
 keymap.set("n", "<leader>fg", function() require("telescope.builtin").live_grep() end, {})
 keymap.set("n", "<leader>fb", function() require("telescope.builtin").buffers() end, {})
 
--- ToggleTerm Config (Tối ưu hóa: Đưa vào function để lazy load)
 local main_term = nil
 local function get_main_term()
     if not main_term then
